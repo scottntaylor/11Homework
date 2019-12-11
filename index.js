@@ -96,14 +96,20 @@ function addEmployee() {
                 employeeRole = employee.employeeRole;
 
 
-                insertEmployee();
+                insertEmployee(employee);
             })
 
     })
 }
 
-function insertEmployee() {
-    
+function insertEmployee(employee) {
+    connection.query(
+        "INSERT INTO employees SET ?",
+        {
+            employeeFirstName: employee.employeeFirstName,
+            employeeLastName: employee.employeeLastName,
+            employeeRole: employee.employeeRole
+        })   
 
 }
 function removeEmployee() {

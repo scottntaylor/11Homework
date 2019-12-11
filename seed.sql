@@ -19,7 +19,7 @@ Create Table Role(
 
 );
 
-Create Table employee (
+Create Table employees (
 
   id INT PRIMARY KEY,
   first_name VARCHAR(30),
