@@ -31,53 +31,88 @@ function start() {
             message: "What would you like to do?",
             choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager"]
         })
-        .then(function(answer){
-            if (answer.Options === "View All Employees"){
+        .then(function (answer) {
+            if (answer.Options === "View All Employees") {
                 viewEmployees();
             }
-            else if(answer.Options === "View All Employees by Department"){
+            else if (answer.Options === "View All Employees by Department") {
                 viewByDepartment();
             }
-            else if(answer.Options === "View All Employees by Manager"){
+            else if (answer.Options === "View All Employees by Manager") {
                 viewByManager();
             }
-            else if (answer.Options === "Add Employee"){
+            else if (answer.Options === "Add Employee") {
                 addEmployee();
             }
-            else if (answer.Options === "Remove Employee"){
+            else if (answer.Options === "Remove Employee") {
                 removeEmployee();
             }
-            else if (answer.Options === "Update Employee Role"){
+            else if (answer.Options === "Update Employee Role") {
                 updateEmployeeRole();
             }
-            else if (answer.Options === "Update Employee Manager"){
+            else if (answer.Options === "Update Employee Manager") {
                 updateEmployeeManager();
             }
-            else{
+            else {
                 connection.end();
             }
 
         })
 }
 
-function viewEmployees(){
+function viewEmployees() {
 
 }
-function viewByDepartment(){
+function viewByDepartment() {
 
 }
-function viewByManager(){
+function viewByManager() {
 
 }
-function addEmployee(){
+function addEmployee() {
+    connection.query("SELECT * FROM Role", function (err, results) {
+        if (err) throw err;
+        inquirer
+            .prompt({
+                name: "employeeFirstName",
+                type: "input",
+                message: "What is the employee's first name?",
+            },
+                {
+                    name: "employeeLastName",
+                    type: "input",
+                    message: "What is the employee's last name?",
+                })
+            .then(function () {
+                selectEmployeeRole();
+            })
+
+    })
+}
+
+function selectEmployeeRole() {
+    inquirer
+        .prompt({
+            name: "employeeRole",
+            type: "list",
+            message: "What is their position?",
+            choices: function () {
+                var postionArray = [];
+                for (var i = 0; i < results.length; i++) {
+                    positionArray.push(results[i].item_name);
+                }
+                return positionArray;
+
+            }
+        })
+        
+}
+function removeEmployee() {
 
 }
-function removeEmployee(){
+function updateEmployeeRole() {
 
 }
-function updateEmployeeRole(){
+function updateEmployeeManager() {
 
-}
-function updateEmployeeManager(){
-    
 }
