@@ -82,30 +82,29 @@ function addEmployee() {
                     name: "employeeLastName",
                     type: "input",
                     message: "What is the employee's last name?",
+                },
+                {
+                    name: "employeeRole",
+                    type: "list",
+                    message: "What is their position?",
+                    choices: ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Accountant", "Legal Team Lead", "Lawyer"]
                 })
-            .then(function () {
-                selectEmployeeRole();
+            .then(function (employee) {
+
+                employeeFirstName = employee.employeeFirstName;
+                employeeLastName = employee.employeeLastName;
+                employeeRole = employee.employeeRole;
+
+
+                insertEmployee();
             })
 
     })
 }
 
-function selectEmployeeRole() {
-    inquirer
-        .prompt({
-            name: "employeeRole",
-            type: "list",
-            message: "What is their position?",
-            choices: function () {
-                var postionArray = [];
-                for (var i = 0; i < results.length; i++) {
-                    positionArray.push(results[i].item_name);
-                }
-                return positionArray;
+function insertEmployee() {
+    
 
-            }
-        })
-        
 }
 function removeEmployee() {
 
