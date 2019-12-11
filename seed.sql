@@ -10,7 +10,7 @@ Create Table department(
   name VARCHAR(30)
 );
 
-Create Table Role(
+Create Table role(
 
   id  INT PRIMARY KEY,
   title VARCHAR(30),

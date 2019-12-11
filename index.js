@@ -45,7 +45,7 @@ function start() {
                 addEmployee();
             }
             else if (answer.Options === "Remove Employee") {
-                removeEmployee();
+                selectRemoveEmployee();
             }
             else if (answer.Options === "Update Employee Role") {
                 updateEmployeeRole();
@@ -112,7 +112,7 @@ function insertEmployee(employee) {
         })
 
 }
-function removeEmployee() {
+function selectRemoveEmployee(employee) {
     connection.query("SELECT * FROM employees", function (err, results) {
         if (err) throw err;
         inquirer
@@ -120,11 +120,21 @@ function removeEmployee() {
                 name: "removeEmployee",
                 type: "list",
                 message: "Which employee would you like to remove?",
-                choices:[]
+                choices: function () {
+                    var employeeArray = [];
+                    for (var i = 0; i < results.length; i++) {
+                        employeeArray.push(results[i].employeeFirstName);
+                    }
+                    return employeeArray;
+                }
+            })
+            .then(function(employee){
+                removeEmployee(employee);
             })
     })
 
 }
+function removeEmployee();
 function updateEmployeeRole() {
 
 }
