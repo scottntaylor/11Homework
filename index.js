@@ -70,7 +70,7 @@ function viewByManager() {
 
 }
 function addEmployee() {
-    connection.query("SELECT * FROM Role", function (err, results) {
+    connection.query("SELECT * FROM role", function (err, results) {
         if (err) throw err;
         inquirer
             .prompt({
@@ -109,10 +109,20 @@ function insertEmployee(employee) {
             employeeFirstName: employee.employeeFirstName,
             employeeLastName: employee.employeeLastName,
             employeeRole: employee.employeeRole
-        })   
+        })
 
 }
 function removeEmployee() {
+    connection.query("SELECT * FROM employees", function (err, results) {
+        if (err) throw err;
+        inquirer
+            .prompt({
+                name: "removeEmployee",
+                type: "list",
+                message: "Which employee would you like to remove?",
+                choices:[]
+            })
+    })
 
 }
 function updateEmployeeRole() {
