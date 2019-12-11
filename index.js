@@ -59,3 +59,25 @@ function start() {
 
         })
 }
+
+function viewEmployees(){
+
+}
+function viewByDepartment(){
+
+}
+function viewByManager(){
+
+}
+function addEmployee(){
+
+}
+function removeEmployee(){
+
+}
+function updateEmployeeRole(){
+
+}
+function updateEmployeeManager(){
+    
+}
