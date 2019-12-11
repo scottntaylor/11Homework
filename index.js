@@ -1,6 +1,7 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
 
+
 // create the connection information for the sql database
 var connection = mysql.createConnection({
     host: "localhost",
@@ -61,6 +62,12 @@ function start() {
 }
 
 function viewEmployees() {
+    var query = "SELECT * FROM employees";
+    connection.query(query, function (err, results) {
+        if (err) throw (err);
+        console.table(results)
+        menu();
+    })
 
 }
 function viewByDepartment() {
@@ -134,7 +141,12 @@ function selectRemoveEmployee(employee) {
     })
 
 }
-function removeEmployee();
+function removeEmployee(employee){
+    connection.query(
+        "DELETE * From employees where first_name = "
+    )
+
+}
 function updateEmployeeRole() {
 
 }
