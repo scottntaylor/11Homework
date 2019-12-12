@@ -29,3 +29,6 @@ Create Table employees (
   manager_id INT
 
 );
+
+insert employees(first_name, last_name, role, manager_id)
+values ("Scott", "Taylor", "Salesperson", 1)

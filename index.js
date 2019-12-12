@@ -13,8 +13,8 @@ var connection = mysql.createConnection({
     user: "root",
 
     // Your password
-    password: "employeeTracker_DB",
-    database: "sunday1194"
+    password: "sunday1194",
+    database: "employeeTracker_DB"
 });
 
 // connect to the mysql server and sql database
@@ -66,7 +66,7 @@ function viewEmployees() {
     connection.query(query, function (err, results) {
         if (err) throw (err);
         console.table(results)
-        menu();
+        start();
     })
 
 }
@@ -94,7 +94,7 @@ function addEmployee() {
                     name: "employeeRole",
                     type: "list",
                     message: "What is their position?",
-                    choices: ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Accountant", "Legal Team Lead", "Lawyer"]
+                    choices: ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer"]
                 })
             .then(function (employee) {
 
@@ -135,19 +135,35 @@ function selectRemoveEmployee(employee) {
                     return employeeArray;
                 }
             })
-            .then(function(employee){
+            .then(function (employee) {
                 removeEmployee(employee);
             })
     })
 
 }
-function removeEmployee(employee){
-    connection.query(
-        "DELETE * From employees where first_name = "
-    )
+// function removeEmployee(employee){
+//     connection.query(
+//         "DELETE * From employees where first_name = "
+//     )
 
-}
+// }
 function updateEmployeeRole() {
+    connection.query("UPDATE FROM emplpyees", function (err, results){
+        if (err) throw err;
+        inquirer
+            .prompt({
+                name: "employeeRole",
+                type: "list",
+                message: "Select the employee whose role you would like to update",
+                choices: function () {
+                    var employeeArray = [];
+                    for (var i = 0; i < results.length; i++) {
+                        employeeArray.push(results[i].employeeFirstName);
+                    }
+                    return employeeArray;
+                }  
+            })
+    })
 
 }
 function updateEmployeeManager() {
