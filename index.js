@@ -54,7 +54,7 @@ function start() {
             // else if (answer.Options === "Update Employee Manager") {
             //     updateEmployeeManager();
             // }
-            else if (answer.Options === "I'm Finished"){
+            else if (answer.Options === "I'm Finished") {
                 connection.end();
             }
 
@@ -94,36 +94,51 @@ function viewByManager() {
 
 }
 function addEmployee() {
-    connection.query("SELECT * FROM role", function (err, results) {
-        if (err) throw err;
-        inquirer
-            .prompt({
+
+    inquirer
+        .prompt([
+            {
                 name: "employeeFirstName",
                 type: "input",
                 message: "What is the employee's first name?"
             },
-                {
-                    name: "employeeLastName",
-                    type: "input",
-                    message: "What is the employee's last name?"
-                },
-                {
-                    name: "employeeRole",
-                    type: "list",
-                    message: "What is their position?",
-                    choices: ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Manager"]
-                })
-            .then(function (employee) {
+            {
+                name: "employeeLastName",
+                type: "input",
+                message: "What is the employee's last name?"
+            },
+            {
+                name: "employeeRole",
+                type: "list",
+                message: "What is their position?",
+                choices: ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Manager"]
+            },
+            {
+            name: "roleID",
+            type: "input",
+            message: "What is your role ID??"
+            },
 
+            {
+                name: "managerID",
+                type: "input",
+                message: "What is your manager ID?"
+            }
+        ])
+        .then(function (employee) {
+            connection.query("SELECT * FROM role", function (err, results) {
                 employeeFirstName = employee.employeeFirstName;
                 employeeLastName = employee.employeeLastName;
                 employeeRole = employee.employeeRole;
+                roleID = employee.roleID;
+                managerID = employee.managerID
 
-
-                insertEmployee(employee);
             })
+            insertEmployee(employee);
+            start();
+        })
 
-    })
+
 }
 
 function insertEmployee(employee) {
@@ -132,7 +147,9 @@ function insertEmployee(employee) {
         {
             first_name: employee.employeeFirstName,
             last_name: employee.employeeLastName,
-            role: employee.employeeRole
+            role: employee.employeeRole,
+            role_id: employee.roleID,
+            manager_id: employee.managerID,
         })
 
 }
@@ -159,10 +176,10 @@ function selectRemoveEmployee(employee) {
 
 }
 function removeEmployee(employee) {
-    connection.query("DELETE * From employees where first_name='Brennan'", function (err, results){
-            if (err) throw err;
-            start();
-        })
+    connection.query("DELETE * From employees where first_name='Brennan'", function (err, results) {
+        if (err) throw err;
+        start();
+    })
 
 }
 function updateEmployeeRole() {
