@@ -30,7 +30,7 @@ function start() {
             name: "Options",
             type: "list",
             message: "What would you like to do?",
-            choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager"]
+            choices: ["View All Employees", "View All Employees by Department", "View All Employees by Manager", "Add Employee", "Remove Employee", "Update Employee Role", "Update Employee Manager", "I'm Finished"]
         })
         .then(function (answer) {
             if (answer.Options === "View All Employees") {
@@ -54,7 +54,7 @@ function start() {
             // else if (answer.Options === "Update Employee Manager") {
             //     updateEmployeeManager();
             // }
-            else {
+            else if (answer.Options === "I'm Finished"){
                 connection.end();
             }
 
