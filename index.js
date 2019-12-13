@@ -71,7 +71,24 @@ function viewEmployees() {
 
 }
 function viewByDepartment() {
+    var query = "select * from employees inner join role on employees.role_id=role.role_id WHERE employees.role_id = 1";
+    connection.query(query, function (err, results) {
+        if (err) throw (err);
 
+        inquirer
+            .prompt({
+                name: "selectDepartment",
+                type: "list",
+                message: "Select which department you would like to view.",
+                choices: ["Sales", "Engineering", "Management"]
+
+            })
+            .then(function (results) {
+                console.table(results)
+                start();
+            })
+
+    })
 }
 function viewByManager() {
 
@@ -83,18 +100,18 @@ function addEmployee() {
             .prompt({
                 name: "employeeFirstName",
                 type: "input",
-                message: "What is the employee's first name?",
+                message: "What is the employee's first name?"
             },
                 {
                     name: "employeeLastName",
                     type: "input",
-                    message: "What is the employee's last name?",
+                    message: "What is the employee's last name?"
                 },
                 {
                     name: "employeeRole",
                     type: "list",
                     message: "What is their position?",
-                    choices: ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer"]
+                    choices: ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Manager"]
                 })
             .then(function (employee) {
 
@@ -113,9 +130,9 @@ function insertEmployee(employee) {
     connection.query(
         "INSERT INTO employees SET ?",
         {
-            employeeFirstName: employee.employeeFirstName,
-            employeeLastName: employee.employeeLastName,
-            employeeRole: employee.employeeRole
+            first_name: employee.employeeFirstName,
+            last_name: employee.employeeLastName,
+            role: employee.employeeRole
         })
 
 }
@@ -130,7 +147,7 @@ function selectRemoveEmployee(employee) {
                 choices: function () {
                     var employeeArray = [];
                     for (var i = 0; i < results.length; i++) {
-                        employeeArray.push(results[i].employeeFirstName);
+                        employeeArray.push(results[i].first_name);
                     }
                     return employeeArray;
                 }
@@ -141,14 +158,15 @@ function selectRemoveEmployee(employee) {
     })
 
 }
-// function removeEmployee(employee){
-//     connection.query(
-//         "DELETE * From employees where first_name = "
-//     )
+function removeEmployee(employee) {
+    connection.query("DELETE * From employees where first_name='Brennan'", function (err, results){
+            if (err) throw err;
+            start();
+        })
 
-// }
+}
 function updateEmployeeRole() {
-    connection.query("UPDATE FROM emplpyees", function (err, results){
+    connection.query("UPDATE FROM emplpyees", function (err, results) {
         if (err) throw err;
         inquirer
             .prompt({
@@ -161,7 +179,7 @@ function updateEmployeeRole() {
                         employeeArray.push(results[i].employeeFirstName);
                     }
                     return employeeArray;
-                }  
+                }
             })
     })
 
