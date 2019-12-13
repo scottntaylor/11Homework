@@ -39,9 +39,9 @@ function start() {
             else if (answer.Options === "View All Employees by Department") {
                 viewByDepartment();
             }
-            else if (answer.Options === "View All Employees by Manager") {
-                viewByManager();
-            }
+            // else if (answer.Options === "View All Employees by Manager") {
+            //     viewByManager();
+            // }
             else if (answer.Options === "Add Employee") {
                 addEmployee();
             }
@@ -51,9 +51,9 @@ function start() {
             else if (answer.Options === "Update Employee Role") {
                 updateEmployeeRole();
             }
-            else if (answer.Options === "Update Employee Manager") {
-                updateEmployeeManager();
-            }
+            // else if (answer.Options === "Update Employee Manager") {
+            //     updateEmployeeManager();
+            // }
             else {
                 connection.end();
             }

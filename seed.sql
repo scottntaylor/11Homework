@@ -21,7 +21,7 @@ Create Table role(
 
 Create Table employees (
 
-  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  employee_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   first_name VARCHAR(30),
   last_name VARCHAR(30),
   role VARCHAR (30),
@@ -30,5 +30,6 @@ Create Table employees (
 
 );
 
-insert employees(first_name, last_name, role, role_id manager_id)
-values ("Scott", "Taylor", "Salesperson", 1, 1)
+insert employees(first_name, last_name, role, role_id, manager_id)
+values ("Scott", "Taylor", "Salesperson", 1, 1);
+

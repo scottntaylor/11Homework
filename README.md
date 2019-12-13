@@ -1,3 +1,7 @@
+This an application for managing employees in a work place.  Through a command line application, users can navigate through a list of options to gather data regarding employees in a work place.  These options include viewing all employees in a list, viewing employees by a specific department, adding employees into the database, removing employees from the database, and updating employees roles within the workplace.
+
+The command line application uses a combination of npm packages such as inquirer and mysql to navigate the user through questions and display data from the database.
+
 # 11Homework
 # Unit 12 MySQL Homework: Employee Tracker
 
